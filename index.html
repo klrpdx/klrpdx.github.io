@@ -1,0 +1,69 @@
+
+<html>
+<script src="/Users/krichards/Projects/Tools/jquery/jquery-3.2.1.min.js"></script>
+<script src="/Users/krichards/Projects/Tools/cookies.js"></script>
+<script>
+function patchItem (id) {
+               var statusDraft = 292;
+               var statusApproved = 293;
+               var statusFailing = 357;
+               var statusPassing = 356;
+
+               var dataObj =  [
+                              { op: "replace",
+                                path: "/fields/test_status$44",
+                                value: 357
+                               },
+                              { op: "replace",
+                                path: "/fields/status",
+                                value: 292
+                               }
+                              ];
+
+               
+                $.ajax({
+                beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Accept","*/*");
+                        xhr.setRequestHeader("Accept-Language","de,en-US;q=0.7,en;q=0.3");
+                        xhr.setRequestHeader("x-jama-tenant","eightten5");
+                        xhr.withCredentials = true;            
+                },
+                type: 'PATCH',
+                contentType: "application/json",
+                url: "http://localhost:8080/contour/rest/latest/items/"+id,
+                data: JSON.stringify(dataObj),
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+        });
+}
+
+ 
+$(document).ready(function() {
+
+
+        var jqxhr = $.ajax({
+               beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Accept","*/*");
+                        xhr.setRequestHeader("Accept-Language","de,en-US;q=0.7,en;q=0.3");
+                        xhr.setRequestHeader("x-jama-tenant","eightten5");
+                        xhr.withCredentials = true;   
+                },
+                url: "http://localhost:8080/contour/rest/latest/items?project=28",
+        })
+        .done(function(data) {
+                if ( console && console.log ) {
+                        console.log( data );
+                        data = [1857, 1849, 1851,1854,1855,1856];
+                        for (i = 0; i < data.length; i++) {
+                                //############ would delete elements in a project ###############
+                                patchItem(data[i]); 
+                                //############# DO NOT USE!!! #######################################
+                        }                
+                }
+        })
+        .fail(function() {      alert( "error" );})    
+});
+</script>
+<img src="./catposter.jpg">
+</html>
