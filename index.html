@@ -29,7 +29,7 @@ function patchItem (id) {
                 },
                 type: 'PATCH',
                 contentType: "application/json",
-                url: "http://localhost:8080/contour/rest/latest/items/"+id,
+                url: "https://localhost:8080/contour/rest/latest/items/"+id,
                 data: JSON.stringify(dataObj),
                 error: function (xhr, textStatus, errorThrown) {
                     console.log(errorThrown);
