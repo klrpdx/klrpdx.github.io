@@ -6,16 +6,19 @@ package com.klrpdx.euler;
  *
  * Find the sum of all the multiples of 3 or 5 below 1000.
  */
-public class ProblemOne {
+public class ProblemOne implements Problem {
 
 
-    public int solve(int maxRange) {
+    @Override
+    public Object solve(Object... maxRange) {
         int sum = 0;
-        for(int i = 0; i<maxRange;i++) {
+        int max = (Integer)maxRange[0];
+        for(int i = 0; i<max;i++) {
             if( i%3==0 || i%5==0) {
                 sum+=i;
             }
         }
         return sum;
     }
+
 }

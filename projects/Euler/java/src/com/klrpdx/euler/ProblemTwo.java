@@ -1,13 +1,14 @@
 package com.klrpdx.euler;
 
-public class ProblemTwo {
+public class ProblemTwo implements Problem {
 
-    public int solve(int maxRange) {
+    public Object solve(Object... maxRange) {
         int sum = 0;
         int last = 0;
         int current = 1;
+        Integer max = (Integer)maxRange[0];
 
-        while (current < maxRange) {
+        while (current < max) {
             int newLast = current;
             current += last;
             if (current%2 == 0) {
