@@ -23,7 +23,7 @@ class ProblemThreeTest {
     @Test
     void biggestPrimeOfPrime() {
         ProblemThree p3 = new ProblemThree();
-        assertEquals(127L, p3.solve(127L));
+        assertEquals(0L, p3.solve(127L));
     }
 
     @Test
@@ -46,8 +46,13 @@ class ProblemThreeTest {
 
 
     @Test
+    // 4177.03 secs
     void problemSolution() {
         ProblemThree p3 = new ProblemThree();
-        assertEquals(6857L, p3.solve(600851475143L));
+        Solver solver = new Solver(p3);
+        Long result = (Long)solver.solve(600851475143L);
+        Double time = solver.time();
+        System.out.printf("Value: %d, Solution: %d, Time: %.2f%n", 600851475143L, result, time);
+        assertEquals(6857L, result);
     }
 }
